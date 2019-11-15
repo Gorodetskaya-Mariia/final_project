@@ -1,7 +1,7 @@
 import React from "react";
 
 const Appointment = () => {
-	return <div>Appointment</div>;
+	return <div className="container">Appointment</div>;
 };
 
 export default Appointment;

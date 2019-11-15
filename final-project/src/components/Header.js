@@ -7,7 +7,7 @@ const { SubMenu } = Menu;
 
 class Header extends React.Component {
   state = {
-    currentPath: '',
+    currentPath: "home",
   };
 
 	componentDidMount(){
@@ -19,7 +19,6 @@ class Header extends React.Component {
 	};
 
   handleClick = e => {
-    console.log('click ', e);
     this.setState({
       currentPath: e.key,
     });
@@ -29,7 +28,7 @@ class Header extends React.Component {
 		const { currentPath } = this.state;
 
     return (
-			<header>
+			<header className="container">
 			<Menu 
 				onClick={this.handleClick}
 				selectedKeys={ currentPath }

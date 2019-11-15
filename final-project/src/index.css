@@ -1,1 +1,14 @@
 @import '../node_modules/antd/dist/antd.css';
+
+.container {
+	width: 700px;
+	margin: 0 auto;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.space-between {
+	justify-content: space-between;
+}
