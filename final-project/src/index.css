@@ -12,3 +12,11 @@
 .space-between {
 	justify-content: space-between;
 }
+
+.f-wrap {
+	flex-wrap: wrap;
+}
+
+.w-100 {
+	width: 100%;
+}
