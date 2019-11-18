@@ -6,7 +6,7 @@ class Services extends React.Component {
   state = {
     services: [],
 		filteredServices: [],
-		forWhom: '',
+		forWhom: ''
   };
 
   componentDidMount() {
@@ -23,24 +23,25 @@ class Services extends React.Component {
 	}
 	
 	afterSetStateFinished(arr) {
-		const {forWhom} = this.state;
+		const { forWhom } = this.state;
 		forWhom === '/services-for-women'
 			? this.setState({filteredServices: Object.keys(arr.women)})
 			: this.setState({filteredServices: Object.keys(arr.men)})
 	}
 
-  renderList(array, forWhom) {
-    return array.map(item => {
+  renderList() {
+		const { filteredServices, forWhom } = this.state;
+    return filteredServices.map(item => {
       return (
-				<ServicesCard 
+				<ServicesCard
 					key={ item }
 					service={ item }
 					forWhom={ forWhom }
 				/>
       );
     });
-  }
-
+	}
+	
   render() {
 		const {filteredServices, forWhom} = this.state;
 
@@ -53,7 +54,7 @@ class Services extends React.Component {
 								: "FOR MEN"
 						}
 					</h2>
-					{filteredServices.length && this.renderList(filteredServices, forWhom)}
+					{filteredServices.length && this.renderList()}
   
       </div>
     );

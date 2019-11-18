@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import ServiceDetail from "./ServiceDetail/ServiceDetail";
 import Account from "./pages/Account";
-import Appointment from "./pages/Appointment";
+import Appointment from "./pages/Appointment/Appointment";
 import Header from "./Header";
 
 const App = () => {

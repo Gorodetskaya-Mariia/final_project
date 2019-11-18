@@ -1,0 +1,23 @@
+.error {
+	color: red;
+}
+
+.form__field {
+	width: 20vw;
+	margin: 20px auto;
+}
+
+.form__field--text,
+.form__field select {
+	width: 20vw;
+}
+
+.form__field-select {
+	padding-top: 10px;
+}
+
+.form__button {
+	display: block;
+	width: 20vw;
+	margin: 0 auto;
+}

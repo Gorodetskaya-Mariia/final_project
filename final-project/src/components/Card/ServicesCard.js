@@ -9,7 +9,10 @@ class ServicesCard extends React.Component{
 	render(){
 		const { service, forWhom }= this.props;
 		return (
-		<Link to={`${forWhom}/${service.toLowerCase()}`} className="services__card">
+		<Link 
+			to={`${forWhom}/${service.toLowerCase()}`}
+			className="services__card"
+		>
         <Card
           key={ service }
           hoverable
