@@ -1,7 +1,13 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
+
 export const FETCH_SERVICES = "FETCH_SERVICES";
 export const FETCH_SERVICE = "FETCH_SERVICE";
+
 export const CREATE_APPOINTMENT = "CREATE_APPOINTMENT";
 export const DELETE_APPOINTMENT = "DELETE_APPOINTMENT";
 export const EDIT_APPOINTMENT = "EDIT_APPOINTMENT";
+
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";

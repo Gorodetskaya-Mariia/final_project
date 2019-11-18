@@ -5,6 +5,7 @@ import Services from "./pages/Services";
 import ServiceDetail from "./ServiceDetail/ServiceDetail";
 import Account from "./pages/Account";
 import Appointment from "./pages/Appointment/Appointment";
+import Auth from "./pages/Auth/Auth";
 import Header from "./Header";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
 				<Route path="/services-for-men/waxing" component={ ServiceDetail }/>
 				<Route path="/account" component={ Account }/>
 				<Route path="/appointment" component={ Appointment }/>
+				<Route path="/login" component={ Auth }/>
 			</BrowserRouter>
 		</div>)
 };

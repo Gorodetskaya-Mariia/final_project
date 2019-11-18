@@ -1,21 +1,18 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createAppointment } from "../../../actions";
 import "./Appointment.css"
 
 const services = ["Color", "Haircutting", "Makeup", "Waxing"];
 const time = ['10AM to 11AM', '11AM to 12PM', '12PM to 13PM', '13PM to 14PM'];
 class Appointment extends React.Component {
 
-	onSubmit(formValues){
+	onSubmit = (formValues) => {
+		this.props.createAppointment(formValues);
 	}
 
-	renderError = ({ error, touched })=> {
-		if(touched && error){
-		return <div className="error">{ error }</div>
-		}
-	}
-
-	renderSelect = ({ input, label, options, meta }) => {
+	renderSelect = ({ input, label, options, meta: { touched, error }}) => {
 		return (
 			<div className="form__field">
         <label>{ label }</label>
@@ -28,7 +25,7 @@ class Appointment extends React.Component {
               </option>
             ))}
 						</select>
-						{ this.renderError(meta) }
+						{ touched && error && <div>{ error }</div> }
 				</div>			
 			</div>
 		)
@@ -69,7 +66,9 @@ const validate = formValues => {
 	return errors;
 } 
 
-export default reduxForm({
+const formWrapped = reduxForm({
 	form: "appointmentCreate",
 	validate: validate
 })(Appointment);
+
+export default connect(null, { createAppointment })(formWrapped);

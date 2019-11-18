@@ -8,7 +8,8 @@
 }
 
 .form__field--text,
-.form__field select {
+.form__field select,
+.form__field input {
 	width: 20vw;
 }
 
