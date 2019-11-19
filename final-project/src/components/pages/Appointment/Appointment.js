@@ -32,8 +32,7 @@ class Appointment extends React.Component {
 	}
 
   render() {
-    return (
-			
+    return (			
       <div className="container">
 				<form onSubmit={ this.props.handleSubmit(this.onSubmit) }>
             <Field name="service" component={ this.renderSelect } label="Select a service" options={ services }>
