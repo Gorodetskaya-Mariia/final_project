@@ -69,6 +69,11 @@ class Header extends React.Component {
 						</Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>   */}
+				<Menu.Item key="account">
+            <Link to="/account" className="">
+              My account
+            </Link>
+          </Menu.Item>
 				<Menu.Item key="login">
 				<Link to="/login" className="">
             Log in

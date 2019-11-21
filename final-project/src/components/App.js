@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Services from "./pages/Services";
+import Services from "./pages/Services/Services";
 import ServiceDetail from "./ServiceDetail/ServiceDetail";
-import Account from "./pages/Account";
+import Account from "./pages/Account/Account";
 import Appointment from "./pages/Appointment/Appointment";
 import Auth from "./pages/Auth/Auth";
 import Header from "./Header";
