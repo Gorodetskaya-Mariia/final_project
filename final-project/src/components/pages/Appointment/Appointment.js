@@ -1,73 +1,118 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { createAppointment } from "../../../actions";
-import "./Appointment.css"
+import * as actions from "../../../actions/";
+import Spinner from "../../Spinner/Spinner";
+import "./Appointment.css";
 
 const services = ["Color", "Haircutting", "Makeup", "Waxing"];
-const time = ['10AM to 11AM', '11AM to 12PM', '12PM to 13PM', '13PM to 14PM'];
+const time = ["10AM to 11AM", "11AM to 12PM", "12PM to 13PM", "13PM to 14PM"];
 class Appointment extends React.Component {
+  onSubmit = formValues => {
+    this.props.onCreateAppointment(
+      formValues,
+      this.props.userId,
+      this.props.token
+    );
+  };
 
-	onSubmit = (formValues) => {
-		this.props.createAppointment(formValues);
-	}
-
-	renderSelect = ({ input, label, options, meta: { touched, error }}) => {
-		return (
-			<div className="form__field">
-        <label>{ label }</label>
-				<div className="form__field-select">
-					<select { ...input }>
-					<option value="">...</option>
-					{options.map(option => (
-              <option value={ option } key={ option }>
-                { option }
+  renderSelect = ({ input, label, options, meta: { touched, error } }) => {
+    return (
+      <div className="form__field">
+        <label>{label}</label>
+        <div className="form__field-select">
+          <select {...input}>
+            <option value="">...</option>
+            {options.map(option => (
+              <option value={option} key={option}>
+                {option}
               </option>
             ))}
-						</select>
-						{ touched && error && <div>{ error }</div> }
-				</div>			
-			</div>
-		)
-	}
-
-  render() {
-    return (			
-      <div className="container">
-				<form onSubmit={ this.props.handleSubmit(this.onSubmit) }>
-            <Field name="service" component={ this.renderSelect } label="Select a service" options={ services }>
-            </Field>
-            <Field name="time" component={ this.renderSelect } label="Choose time" options={ time }>
-            </Field>
-				<div className="form__field">
-        <label>Your message</label>
-        <div>
-          <Field
-            name="message"
-						component="textarea"						
-						type="text"
-						className="form__field--text"
-            placeholder=""
-          />
+          </select>
+          {touched && error && <div>{error}</div>}
         </div>
       </div>
-			<button className="form__button">Submit</button>
-			</form>
-      </div>
     );
+  };
+
+  render() {
+    let form = (
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <Field
+          name="service"
+          component={this.renderSelect}
+          label="Select a service"
+          options={services}
+        ></Field>
+        <Field
+          name="time"
+          component={this.renderSelect}
+          label="Choose time"
+          options={time}
+        ></Field>
+        <div className="form__field">
+          <label>Your name</label>
+          <div>
+            <Field
+              name="name"
+              type="text"
+              component="input"
+              label="Username"
+              className="form__field--text"
+              // validate={ [required, maxLength15, minLength6] }
+            />
+          </div>
+        </div>
+        <div className="form__field">
+          <label>Your message</label>
+          <div>
+            <Field
+              name="message"
+              component="textarea"
+              type="text"
+              className="form__field--text"
+              placeholder=""
+            />
+          </div>
+        </div>
+        <button className="form__button">Submit</button>
+      </form>
+    );
+
+    if (this.props.loading) {
+      form = <Spinner />;
+    }
+
+    return <div className="container">{form}</div>;
   }
 }
 
 const validate = formValues => {
-	const errors = {};
-	if(!formValues.service) errors.service = "You have to select a service";
-	if(!formValues.time) errors.time = "You have to select time";
-	return errors;
-} 
+  const errors = {};
+  if (!formValues.service) errors.service = "You have to select a service";
+  if (!formValues.time) errors.time = "You have to select time";
+  if (!formValues.name) errors.name = "You have to type your name";
+  return errors;
+};
 
-const formWrapped = reduxForm({
-	form: "appointmentCreate",
-	validate: validate
+const mapStateToProps = state => {
+  return {
+    loading: state.account.loading,
+    token: state.auth.token,
+    userId: state.auth.userId
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCreateAppointment: (formValues, userId, token) =>
+      dispatch(actions.createAppointment(formValues, userId, token))
+  };
+};
+
+Appointment = connect(mapStateToProps, mapDispatchToProps)(Appointment);
+
+export default reduxForm({
+  form: "createAppointment",
+  validate
 })(Appointment);
-
-export default connect(null, { createAppointment })(formWrapped);

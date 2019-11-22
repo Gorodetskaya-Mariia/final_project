@@ -1,6 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import * as actions from "../../../actions";
 import Spinner from "../../Spinner/Spinner";
 
@@ -69,7 +70,7 @@ class Auth extends React.Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
-		let errorMessage = null;
+    let errorMessage = null;
     let form = (
       <div>
         <Field
@@ -89,16 +90,22 @@ class Auth extends React.Component {
       </div>
     );
 
-		if (this.props.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
 
-    if (this.props.error) {			
+    if (this.props.error) {
       errorMessage = <p>{this.props.error.message}</p>;
+    }
+
+    let authRedirect = null;
+    if (this.props.isAuthencitaced) {
+      authRedirect = <Redirect to="/" />;
     }
 
     return (
       <div className="container">
+        {authRedirect}
         {errorMessage}
         <form onSubmit={handleSubmit(this.onSubmit)}>
           {form}
@@ -146,7 +153,8 @@ class Auth extends React.Component {
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    isAuthencitaced: state.auth.token !== null
   };
 };
 
@@ -157,11 +165,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-Auth = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Auth);
+Auth = connect(mapStateToProps, mapDispatchToProps)(Auth);
 
 export default reduxForm({
-	form: "auth" 
+  form: "auth"
 })(Auth);

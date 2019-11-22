@@ -4,6 +4,18 @@ import { Button } from "antd";
 import "./ServiceDetail.css";
 
 class ServiceDetail extends React.Component {
+  onBookHandeler = () => {
+    this.props.history.push("/appointment");
+  };
+
+  onCancelHandeler = () => {
+    this.props.history.push("/account");
+  };
+
+  onSignupHandeler = () => {
+    this.props.history.push("/login");
+  };
+
   renderList() {
     const { selectedService } = this.props.services;
     let filteredArray = Object.keys(selectedService);
@@ -19,10 +31,21 @@ class ServiceDetail extends React.Component {
         <p className="service__name">{item}</p>
         <p className="service__price">{`from $${selectedService[item].price}`}</p>
         <div className="service__buttons d-flex">
-          <Button type="primary" className="service__buttons--book">
+          <Button
+            type="primary"
+            disabled={!this.props.isAuthencitaced}
+            className="service__buttons--book"
+            onClick={this.onBookHandeler}
+          >
             Book
           </Button>
-          <Button type="danger">Cancel</Button>
+          <Button
+            type="danger"
+            disabled={!this.props.isAuthencitaced}
+            onClick={this.onCancelHandeler}
+          >
+            Cancel
+          </Button>
         </div>
       </div>
     ));
@@ -39,11 +62,22 @@ class ServiceDetail extends React.Component {
           />
           <div className="service__list d-flex flex-column">
             <div className="service__description">
+              {" "}
               {this.props.services.selectedService.description}
             </div>
             {this.props.services.selectedService && this.renderList()}
           </div>
         </div>
+        {!this.props.isAuthencitaced && (
+          <div>
+            Booking is available only for authencitaced customers. If you want
+            to book an appointment please
+            <span onClick={this.onSignupHandeler} className="service__info">
+              {" "}
+              click for sign up
+            </span>
+          </div>
+        )}
       </div>
     );
   }
@@ -51,7 +85,8 @@ class ServiceDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    services: state.services
+    services: state.services,
+    isAuthencitaced: state.auth.token !== null
   };
 };
 

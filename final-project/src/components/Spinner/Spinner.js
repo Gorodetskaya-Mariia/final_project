@@ -1,8 +1,11 @@
-import React from 'react';
-import { Spin } from 'antd';
+import React from "react";
+import { Spin } from "antd";
+import "./Spinner.css";
 
 const spinner = () => (
-	<Spin size="large"/>
+  <div className="spinner-wrapper">
+    <Spin size="large" />
+  </div>
 );
 
 export default spinner;

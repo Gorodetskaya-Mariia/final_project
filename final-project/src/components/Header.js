@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import GoogleAuth from "./GoogleAuth";
 import { Menu } from "antd";
 
@@ -69,20 +70,36 @@ class Header extends React.Component {
 						</Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>   */}
-				<Menu.Item key="account">
-            <Link to="/account" className="">
-              My account
-            </Link>
+
+          {this.props.isAuthencitaced && (
+            <Menu.Item key="account">
+              <Link to="/account" className="">
+                My account
+              </Link>
+            </Menu.Item>
+          )}
+
+          <Menu.Item key="login">
+            {!this.props.isAuthencitaced ? (
+              <Link to="/login" className="">
+                Login
+              </Link>
+            ) : (
+              <Link to="/logout" className="">
+                Logout
+              </Link>
+            )}
           </Menu.Item>
-				<Menu.Item key="login">
-				<Link to="/login" className="">
-            Log in
-          </Link>
-          </Menu.Item>          
         </Menu>
       </header>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    isAuthencitaced: state.auth.token !== null
+  };
+};
+
+export default connect(mapStateToProps)(Header);
