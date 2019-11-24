@@ -7,6 +7,13 @@ import "./Appointment.css";
 
 const services = ["Color", "Haircutting", "Makeup", "Waxing"];
 const time = ["10AM to 11AM", "11AM to 12PM", "12PM to 13PM", "13PM to 14PM"];
+const required = value =>
+  value || typeof value === "number" ? undefined : "Required";
+const alphaNumeric = value =>
+  value && /[^a-zA-Z0-9 ]/i.test(value)
+    ? "Only alphanumeric characters"
+    : undefined;
+
 class Appointment extends React.Component {
   onSubmit = formValues => {
     this.props.onCreateAppointment(
@@ -43,26 +50,15 @@ class Appointment extends React.Component {
           component={this.renderSelect}
           label="Select a service"
           options={services}
+          validate={[required]}
         ></Field>
         <Field
           name="time"
           component={this.renderSelect}
           label="Choose time"
           options={time}
+          validate={[required]}
         ></Field>
-        <div className="form__field">
-          <label>Your name</label>
-          <div>
-            <Field
-              name="name"
-              type="text"
-              component="input"
-              label="Username"
-              className="form__field--text"
-              // validate={ [required, maxLength15, minLength6] }
-            />
-          </div>
-        </div>
         <div className="form__field">
           <label>Your message</label>
           <div>
@@ -72,6 +68,7 @@ class Appointment extends React.Component {
               type="text"
               className="form__field--text"
               placeholder=""
+              validate={[alphaNumeric]}
             />
           </div>
         </div>

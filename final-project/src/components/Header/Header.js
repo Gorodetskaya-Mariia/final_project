@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import GoogleAuth from "./GoogleAuth";
+import GoogleAuth from "../GoogleAuth";
 import { Menu } from "antd";
+import "./Header.css";
 
 const { SubMenu } = Menu;
 

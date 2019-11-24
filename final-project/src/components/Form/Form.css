@@ -1,0 +1,64 @@
+.container--form p {
+  margin: 0 auto;
+  text-align: center;
+  color: red;
+}
+
+.error {
+  color: red;
+}
+
+.form__field .error > input {
+  border-color: red;
+}
+
+form {
+  width: 20vw;
+  margin: 0 auto;
+}
+
+.form__field {
+  width: 20vw;
+  margin: 20px auto;
+}
+
+.form__field--text,
+.form__field select,
+.form__field input {
+  width: 20vw;
+  height: 35px;
+  padding: 5px 10px;
+  border: 1px solid #e8e8e8;
+}
+
+.form__field label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.form__field-select {
+  padding-top: 10px;
+}
+
+.form__button {
+  display: block;
+  width: 20vw;
+  height: 40px;
+  font-size: 16px;
+  margin: 0 auto 15px auto;
+  background-color: #ff7875;
+  border: 1px solid #ff7875;
+  border-radius: 4px;
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.form__button:hover,
+.form__button:focus {
+  opacity: 0.7;
+}

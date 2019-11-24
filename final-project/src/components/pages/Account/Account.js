@@ -3,12 +3,16 @@ import { connect } from "react-redux";
 import * as actions from "../../../actions";
 import Spinner from "../../Spinner/Spinner";
 import { Card } from "antd";
+import { Button } from "antd";
+import "./Account.css";
 
 class Account extends React.Component {
   componentDidMount() {
     const { onFetchAppointments, token, userId } = this.props;
     onFetchAppointments(token, userId);
   }
+
+  onDeleteHandeler = () => {};
 
   render() {
     let appointments = [];
@@ -17,21 +21,31 @@ class Account extends React.Component {
     appointments = this.props.appointments.map(appointment => (
       <div
         key={appointment.id}
-        className="services__card-row d-flex space-between"
+        className="account__card-row d-flex space-between align-items-center"
       >
         <p>{appointment.service}</p>
         <p>{appointment.time}</p>
+        <Button type="danger" onClick={this.onDeleteHandeler}>
+          Delete
+        </Button>
       </div>
     ));
     if (!this.props.loading) {
       content = (
-        <Card title="Services" bordered={true} className="services__card">
-          {appointments}
-        </Card>
+        <div className="container container--account d-flex justify-center">
+          <Card title="Services" bordered={true} className="account__card">
+            {appointments}
+          </Card>
+          <Card
+            title="Personal information"
+            bordered={true}
+            className="account__card"
+          ></Card>
+        </div>
       );
     }
 
-    return <div className="container d-flex justify-center">{content}</div>;
+    return content;
   }
 }
 

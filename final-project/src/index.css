@@ -1,9 +1,43 @@
 @import "../node_modules/antd/dist/antd.css";
 
+body {
+  background-color: #ffd1d1;
+}
+
 .container {
-  width: 700px;
-  padding-top: 30px;
+  width: 1000px;
   margin: 0 auto;
+  padding: 30px;
+}
+
+main.container {
+  min-height: 700px;
+  background-color: white;
+  box-shadow: 0 2px 8px;
+}
+.container .ant-btn.ant-btn-primary {
+  background-color: #ff7875;
+  border-color: #ff7875;
+}
+
+.container .ant-btn-danger,
+.container .ant-btn-danger {
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.container .ant-btn-danger:hover,
+.container .ant-btn-danger:focus {
+  background-color: #000000;
+  border-color: #000000;
+  opacity: 0.7;
+}
+
+.container .ant-btn-primary:hover,
+.container .ant-btn-primary:focus {
+  background-color: #ff7875;
+  border-color: #ff7875;
+  opacity: 0.7;
 }
 
 .d-flex {

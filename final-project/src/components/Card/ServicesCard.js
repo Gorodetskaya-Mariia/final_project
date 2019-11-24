@@ -6,7 +6,7 @@ const { Meta } = Card;
 class ServicesCard extends React.Component{
 
 	render(){
-		const { service }= this.props;
+		const { service, forWhom }= this.props;
 		return (
 
         <Card
@@ -15,7 +15,7 @@ class ServicesCard extends React.Component{
           cover={
 						<img
 						alt="example"
-						src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+						src={`images${forWhom}-${service.toLowerCase()}.png`}
 					/>
 					}
         >

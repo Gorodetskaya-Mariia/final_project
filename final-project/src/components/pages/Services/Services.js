@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/index";
 import ServicesCard from "../../Card/ServicesCard";
+import Spinner from "../../Spinner/Spinner";
+import "./Services.css";
 
 class Services extends React.Component {
   state = {
@@ -42,28 +44,51 @@ class Services extends React.Component {
 
   renderList() {
     const { filteredServices, forWhom } = this.state;
+		let content = (
+			filteredServices.map(item => (
+				<Link
+					to={`${forWhom}/${item.toLowerCase()}`}
+					className="services__card"
+					key={item}
+					onClick={() => this.selectHandler(item)}
+				>
+					<ServicesCard service={item} forWhom={forWhom}/>
+				</Link>
+			))
+		);
 
-    return filteredServices.map(item => (
-      <Link
-        to={`${forWhom}/${item.toLowerCase()}`}
-        className="services__card"
-        key={item}
-        onClick={() => this.selectHandler(item)}
-      >
-        <ServicesCard service={item} />
-      </Link>
-    ));
+		if (this.props.loading) {
+      content = <Spinner />;
+    }
+    return (
+			content
+		)
   }
 
   render() {
     const { forWhom } = this.state;
+		let src = "";
+		let classAdd = "";
+
+		if(forWhom === "/services-for-women"){
+			src="images/services-women.png";
+			classAdd = "";
+		} else {
+			classAdd = "services__image--men";
+			src="images/services-men.png";
+		}
 
     return (
-      <div className="container d-flex space-between f-wrap">
-        <h2 className="w-100">
-          {forWhom === "/services-for-women" ? "FOR WOMEN" : "FOR MEN"}
-        </h2>
-        {this.state.filteredServices && this.renderList()}
+      <div>
+				<div className="w-100 d-flex justify-center">
+					<img
+						className={`services__image ${classAdd}`}
+						alt="services"
+						src={ src }></img>
+					</div>
+				<div className="services__container d-flex space-between">
+					{this.state.filteredServices && this.renderList()}
+				</div>        
       </div>
     );
   }
@@ -72,7 +97,8 @@ class Services extends React.Component {
 const mapStateToProps = state => {
   return {
     services: state.services.services,
-    error: state.services.error,
+		error: state.services.error,
+		loading: state.services.loading,
 		isAuthenticated: state.auth.token !== null,
 		selectedService: state.selectedService,
   };
@@ -82,7 +108,6 @@ const mapDispatchToProps = dispatch => {
   return {
 		onInitServices: () => dispatch(actions.initServices()),
 		onInitSelectedServices: (state) => dispatch(actions.setSelectedService(state))
-    // onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
   };
 };
 

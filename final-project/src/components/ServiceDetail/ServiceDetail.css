@@ -4,8 +4,7 @@
 }
 
 .service__wrapper {
-  padding-top: 30px;
-  margin-bottom: 30px;
+	padding: 50px;
 }
 
 .service__description {

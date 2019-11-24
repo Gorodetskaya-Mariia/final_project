@@ -81,11 +81,9 @@ export const createAppointment = (
   userId,
   token
 ) => async dispatch => {
-  console.log(userId);
   const payload = updateObject(formValues, {
     userId: userId
   });
-  console.log("payload", payload);
   dispatch(createAppointmentStart());
   axios
     .post(

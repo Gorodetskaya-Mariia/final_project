@@ -8,7 +8,7 @@ import Account from "./components/pages/Account/Account";
 import Appointment from "./components/pages/Appointment/Appointment";
 import Auth from "./components/pages/Auth/Auth";
 import Logout from "./components/Logout/Logout";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import * as actions from "./actions";
 
 class App extends React.Component {
@@ -19,20 +19,22 @@ class App extends React.Component {
     let routes = (
       <BrowserRouter>
         <Header></Header>
-        <Route path="/" exact component={Home} />
-        <Route path="/services-for-men" exact component={Services} />
-        <Route path="/services-for-women" exact component={Services} />
-        <Route path="/services-for-women/color" component={ServiceDetail} />
-        <Route
-          path="/services-for-women/haircutting"
-          component={ServiceDetail}
-        />
-        <Route path="/services-for-women/makeup" component={ServiceDetail} />
-        <Route path="/services-for-women/waxing" component={ServiceDetail} />
-        <Route path="/services-for-men/color" component={ServiceDetail} />
-        <Route path="/services-for-men/haircutting" component={ServiceDetail} />
-        <Route path="/services-for-men/waxing" component={ServiceDetail} />
-        <Route path="/login" component={Auth} />
+				<main className="container">
+					<Route path="/" exact component={Home} />
+					<Route path="/services-for-men" exact component={Services} />
+					<Route path="/services-for-women" exact component={Services} />
+					<Route path="/services-for-women/color" component={ServiceDetail} />
+					<Route
+						path="/services-for-women/haircutting"
+						component={ServiceDetail}
+					/>
+					<Route path="/services-for-women/makeup" component={ServiceDetail} />
+					<Route path="/services-for-women/waxing" component={ServiceDetail} />
+					<Route path="/services-for-men/color" component={ServiceDetail} />
+					<Route path="/services-for-men/haircutting" component={ServiceDetail} />
+					<Route path="/services-for-men/waxing" component={ServiceDetail} />
+					<Route path="/login" component={Auth} />
+				</main>       
         <Redirect to="/login" />
       </BrowserRouter>
     );
@@ -41,26 +43,28 @@ class App extends React.Component {
       routes = (
         <BrowserRouter>
           <Header></Header>
-          <Route path="/" exact component={Home} />
-          <Route path="/services-for-men" exact component={Services} />
-          <Route path="/services-for-women" exact component={Services} />
-          <Route path="/services-for-women/color" component={ServiceDetail} />
-          <Route
-            path="/services-for-women/haircutting"
-            component={ServiceDetail}
-          />
-          <Route path="/services-for-women/makeup" component={ServiceDetail} />
-          <Route path="/services-for-women/waxing" component={ServiceDetail} />
-          <Route path="/services-for-men/color" component={ServiceDetail} />
-          <Route
-            path="/services-for-men/haircutting"
-            component={ServiceDetail}
-          />
-          <Route path="/services-for-men/waxing" component={ServiceDetail} />
-          <Route path="/login" component={Auth} />
-          <Route path="/logout" component={Logout} />
-          <Route path="/account" component={Account} />
-          <Route path="/appointment" component={Appointment} />
+					<main className="container">
+						<Route path="/" exact component={Home} />
+						<Route path="/services-for-men" exact component={Services} />
+						<Route path="/services-for-women" exact component={Services} />
+						<Route path="/services-for-women/color" component={ServiceDetail} />
+						<Route
+							path="/services-for-women/haircutting"
+							component={ServiceDetail}
+						/>
+						<Route path="/services-for-women/makeup" component={ServiceDetail} />
+						<Route path="/services-for-women/waxing" component={ServiceDetail} />
+						<Route path="/services-for-men/color" component={ServiceDetail} />
+						<Route
+							path="/services-for-men/haircutting"
+							component={ServiceDetail}
+						/>
+						<Route path="/services-for-men/waxing" component={ServiceDetail} />
+						<Route path="/login" component={Auth} />
+						<Route path="/logout" component={Logout} />
+						<Route path="/account" component={Account} />
+						<Route path="/appointment" component={Appointment} />
+					</main>          
         </BrowserRouter>
       );
     }

@@ -6,6 +6,8 @@ export { initServices, setSelectedService } from "./services";
 
 export { fetchAppointments, createAppointment } from "./account";
 
+export { addUserData } from "./form";
+
 export const signIn = userId => {
   return {
     type: SIGN_IN,

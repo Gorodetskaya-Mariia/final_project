@@ -1,3 +1,24 @@
-.services__card {
-  width: 250px;
+.container.container--account {
+  padding: 80px;
+  min-height: 300px;
+}
+
+.account__card {
+  width: 350px;
+}
+
+.account__card:first-of-type {
+  margin-right: 30px;
+}
+
+.account__card-row p {
+  margin-bottom: 0;
+}
+
+.account__card-row p:first-of-type {
+  font-weight: 700;
+}
+
+.account__card-row {
+  margin-bottom: 10px;
 }

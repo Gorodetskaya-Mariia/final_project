@@ -4,41 +4,23 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as actions from "../../../actions";
 import Spinner from "../../Spinner/Spinner";
+import Form from "../../Form/Form";
 
 const required = value =>
-  value || typeof value === "number" ? undefined : "Required";
-const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
-const maxLength15 = maxLength(15);
+	value || typeof value === "number" ? undefined : "Required";
+	
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined;
 export const minLength6 = minLength(6);
-const number = value =>
-  value && isNaN(Number(value)) ? "Must be a number" : undefined;
-const minValue = min => value =>
-  value && value < min ? `Must be at least ${min}` : undefined;
-const minValue18 = minValue(18);
+
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? "Invalid email address"
-    : undefined;
-const password = value =>
-  value !== "redux-form" ? "Invalid password" : undefined;
-const tooYoung = value =>
-  value && value < 18
-    ? "You do not meet the minimum age requirement!"
-    : undefined;
-const alphaNumeric = value =>
-  value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? "Only alphanumeric characters"
-    : undefined;
-export const phoneNumber = value =>
-  value && !/^(0|[1-9][0-9]{10})$/i.test(value)
-    ? "Invalid phone number, must be 11 digits"
-    : undefined;
+		: undefined;
+		let FormInfo = null;
 
 class Auth extends React.Component {
-  state = { isSignup: true };
+	state = { isSignup: true, flag: false };
 
   switchAuthModeHandler = () => {
     this.setState(prevState => {
@@ -51,18 +33,27 @@ class Auth extends React.Component {
       formValues.email,
       formValues.password,
       this.state.isSignup
-    );
+		);
+
+		if(this.state.isSignup){
+			FormInfo = (
+				<div>
+					<p>Please provide us information about you. The information requires for booking an appointment</p>
+			<Form/>
+				</div>				
+			);
+			this.setState({flag: true});
+		}
   };
 
-  renderField = ({ input, label, type, meta: { touched, error, warning } }) => {
+  renderField = ({ input, label, type, meta: { touched, error } }) => {
     return (
       <div className="form__field">
         <label>{label}</label>
         <div>
           <input {...input} placeholder={label} type={type} />
           {touched &&
-            ((error && <div>{error}</div>) ||
-              (warning && <div>{warning}</div>))}
+            ((error && <div className="error">{error}</div>))}
         </div>
       </div>
     );
@@ -70,25 +61,37 @@ class Auth extends React.Component {
 
   render() {
     const { handleSubmit, submitting } = this.props;
-    let errorMessage = null;
-    let form = (
-      <div>
+		let errorMessage = null;
+		let form = null;
+    if(!this.state.flag) {
+			form = (
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Field
           name="email"
           type="email"
           component={this.renderField}
           label="Email"
-          validate={[email]}
+          validate={[email, required]}					
         />
         <Field
           name="password"
           type="password"
           component={this.renderField}
           label="Password"
-          validate={[minLength6]}
+          validate={[minLength6, required]}
         />
-      </div>
-    );
+				<div>
+            <button
+              type="submit"
+              disabled={submitting}
+              className="form__button"
+            >
+              Submit
+            </button>		
+          </div>
+      </form>
+		);
+			}
 
     if (this.props.loading) {
       form = <Spinner />;
@@ -99,52 +102,24 @@ class Auth extends React.Component {
     }
 
     let authRedirect = null;
-    if (this.props.isAuthencitaced) {
+    if (this.props.isAuthencitaced &&!this.state.isSignup) {
       authRedirect = <Redirect to="/" />;
-    }
+		}
 
-    return (
-      <div className="container">
-        {authRedirect}
-        {errorMessage}
-        <form onSubmit={handleSubmit(this.onSubmit)}>
-          {form}
-          {/* <Field
-        name="username"
-        type="text"
-        component={ this.renderField }
-        label="Username"
-        validate={ [required, maxLength15, minLength6] }
-        warn={ alphaNumeric }
-      /> */}
-          {/* <Field
-        name="phone"
-        type="number"
-        component={ this.renderField }
-        label="Phone number"
-        validate={ [required, phoneNumber] }
-      /> */}
-          {/* <Field
-        name="age"
-        type="number"
-        component={ this.renderField }
-        label="Age"
-        validate={ [required, number, minValue18] }
-        warn={ tooYoung }
-      />      */}
-          <div>
-            <button
-              type="submit"
-              disabled={submitting}
-              className="form__button"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-        <button onClick={this.switchAuthModeHandler} className="form__button">
+		let buttonSwitch = null;
+		if(!this.props.isAuthencitaced){
+			buttonSwitch = <button onClick={this.switchAuthModeHandler} className="form__button">
           Switch to {this.state.isSignup ? "Sign in" : "Sign Up"}
         </button>
+		}
+
+    return (
+      <div className="container container--form">
+        {authRedirect}
+        {errorMessage}        
+        {form}
+				{FormInfo}
+				{buttonSwitch}       
       </div>
     );
   }
