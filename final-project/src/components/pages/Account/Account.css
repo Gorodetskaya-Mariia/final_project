@@ -1,6 +1,5 @@
-.container.container--account {
-  padding: 80px;
-  min-height: 300px;
+.container--account {
+  padding-top: 50px;
 }
 
 .account__card {
@@ -19,6 +18,7 @@
   font-weight: 700;
 }
 
-.account__card-row {
+.account__card-row,
+.account__card-item {
   margin-bottom: 10px;
 }

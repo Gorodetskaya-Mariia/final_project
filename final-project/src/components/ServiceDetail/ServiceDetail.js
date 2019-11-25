@@ -1,18 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "antd";
+import { Button, Icon } from "antd";
 import "./ServiceDetail.css";
 
 class ServiceDetail extends React.Component {
-  onBookHandeler = () => {
+  onBookHandler = () => {
     this.props.history.push("/appointment");
   };
 
-  onCancelHandeler = () => {
+  onCancelHandler = () => {
     this.props.history.push("/account");
   };
 
-  onSignupHandeler = () => {
+  onSignupHandler = () => {
     this.props.history.push("/login");
   };
 
@@ -33,16 +33,16 @@ class ServiceDetail extends React.Component {
         <div className="service__buttons d-flex">
           <Button
             type="primary"
-            disabled={!this.props.isAuthencitaced}
+            disabled={!this.props.isAuthenticated}
             className="service__buttons--book"
-            onClick={this.onBookHandeler}
+            onClick={this.onBookHandler}
           >
             Book
           </Button>
           <Button
             type="danger"
-            disabled={!this.props.isAuthencitaced}
-            onClick={this.onCancelHandeler}
+            disabled={!this.props.isAuthenticated}
+            onClick={this.onCancelHandler}
           >
             Cancel
           </Button>
@@ -53,26 +53,21 @@ class ServiceDetail extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="service__wrapper d-flex">
-          <img
-            className="service__image"
-            alt=""
-            src="https://www.beinspiredsalon.com/wp-content/uploads/2015/05/COLOR-services-420x561.jpg"
-          />
-          <div className="service__list d-flex flex-column">
-            <div className="service__description">
-              {" "}
-              {this.props.services.selectedService.description}
-            </div>
+      <div>
+        <div className="service__wrapper d-flex flex-column">
+					<div className="service__description">
+            {this.props.services.selectedService.description}
+          </div>
+          <div className="service__list d-flex flex-column">            
             {this.props.services.selectedService && this.renderList()}
           </div>
         </div>
-        {!this.props.isAuthencitaced && (
-          <div>
-            Booking is available only for authencitaced customers. If you want
+        {!this.props.isAuthenticated && (
+          <div className="service__info">
+					<Icon type="exclamation-circle" className="service__icon"/>
+            Booking is available only for authenticated customers. If you want
             to book an appointment please
-            <span onClick={this.onSignupHandeler} className="service__info">
+            <span onClick={this.onSignupHandler}>
               {" "}
               click for sign up
             </span>
@@ -86,7 +81,7 @@ class ServiceDetail extends React.Component {
 const mapStateToProps = state => {
   return {
     services: state.services,
-    isAuthencitaced: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null
   };
 };
 

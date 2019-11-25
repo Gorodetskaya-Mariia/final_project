@@ -72,7 +72,7 @@ class Header extends React.Component {
           </Menu.ItemGroup>
         </SubMenu>   */}
 
-          {this.props.isAuthencitaced && (
+          {this.props.isAuthenticated && (
             <Menu.Item key="account">
               <Link to="/account" className="">
                 My account
@@ -81,7 +81,7 @@ class Header extends React.Component {
           )}
 
           <Menu.Item key="login">
-            {!this.props.isAuthencitaced ? (
+            {!this.props.isAuthenticated ? (
               <Link to="/login" className="">
                 Login
               </Link>
@@ -99,7 +99,7 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthencitaced: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null
   };
 };
 

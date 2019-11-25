@@ -9,7 +9,10 @@
 
 .service__description {
   padding-top: 20px;
-  margin-bottom: 20px;
+	width: 70%;
+	margin: 0 auto 30px auto;
+	text-align: center;
+	font-size: 17px;
 }
 
 .service__list {
@@ -17,10 +20,13 @@
 }
 
 .service__item {
-  margin-bottom: 15px;
+  font-size: 15px;
+  width: 60%;
+  margin: 0 auto 15px auto;
 }
 .service__name {
-  width: 35%;
+	width: 35%;
+	font-weight: 700;
   margin: 0 30px 0 0;
 }
 
@@ -37,11 +43,19 @@
 }
 
 .service__info {
-  color: #1890ff;
+	font-size: 15px;
+}
+
+.service__info span {
+  color: #ff7875;
   cursor: pointer;
   transition: opacity 0.3s;
 }
 
-.service__info:hover {
+.service__info span:hover {
   opacity: 0.6;
+}
+
+.service__icon {
+	margin-right: 10px;
 }

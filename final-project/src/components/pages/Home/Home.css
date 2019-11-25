@@ -1,0 +1,21 @@
+.container--home {
+  padding-top: 168px;
+  background: url("/images/background.jpg") no-repeat;
+}
+
+.ant-carousel {
+  width: 40%;
+}
+
+.ant-carousel .slick-slide {
+  text-align: center;
+  height: 360px !important;
+  overflow: hidden;
+  border: 20px solid #ffd1d1;
+  border-radius: 5px;
+}
+
+.ant-carousel .slick-slide img {
+  margin: 20px auto;
+  height: 200px;
+}

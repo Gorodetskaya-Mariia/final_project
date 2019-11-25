@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import Home from "./components/pages/Home";
+import Home from "./components/pages/Home/Home";
 import Services from "./components/pages/Services/Services";
 import ServiceDetail from "./components/ServiceDetail/ServiceDetail";
 import Account from "./components/pages/Account/Account";
@@ -64,6 +64,7 @@ class App extends React.Component {
 						<Route path="/logout" component={Logout} />
 						<Route path="/account" component={Account} />
 						<Route path="/appointment" component={Appointment} />
+						<Redirect to="/" />
 					</main>          
         </BrowserRouter>
       );

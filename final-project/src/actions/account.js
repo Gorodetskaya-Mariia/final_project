@@ -38,14 +38,14 @@ export const fetchAppointments = (token, userId) => async dispatch => {
     )
     .then(response => JSON.stringify(response.data))
     .then(data => {
-      const result = JSON.parse(data);
+			const result = JSON.parse(data);
       const fetchedAppointments = [];
       for (let key in result) {
         fetchedAppointments.push({
           ...result[key],
           id: key
         });
-      }
+			}
       dispatch(fetchAppointmentsSuccess(fetchedAppointments));
     })
     .catch(error => {

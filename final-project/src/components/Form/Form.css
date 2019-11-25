@@ -1,3 +1,7 @@
+.container--form {
+	padding-top: 30px;
+}
+
 .container--form p {
   margin: 0 auto;
   text-align: center;

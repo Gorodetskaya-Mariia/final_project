@@ -3,10 +3,9 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import * as actions from "../../../actions/";
 import Spinner from "../../Spinner/Spinner";
-import "./Appointment.css";
 
 const services = ["Color", "Haircutting", "Makeup", "Waxing"];
-const time = ["10AM to 11AM", "11AM to 12PM", "12PM to 13PM", "13PM to 14PM"];
+const time = ["10AM to 11AM", "11AM to 12PM", "12PM to 13PM", "13PM to 14PM","15PM to 16PM","16PM to 17PM","17PM to 18PM"];
 const required = value =>
   value || typeof value === "number" ? undefined : "Required";
 const alphaNumeric = value =>
@@ -36,7 +35,7 @@ class Appointment extends React.Component {
               </option>
             ))}
           </select>
-          {touched && error && <div>{error}</div>}
+          {touched && error && <div className="error">{error}</div>}
         </div>
       </div>
     );
@@ -80,7 +79,7 @@ class Appointment extends React.Component {
       form = <Spinner />;
     }
 
-    return <div className="container">{form}</div>;
+    return <div className="container--form">{form}</div>;
   }
 }
 

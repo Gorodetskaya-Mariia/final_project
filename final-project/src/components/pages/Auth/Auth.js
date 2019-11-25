@@ -38,8 +38,8 @@ class Auth extends React.Component {
 		if(this.state.isSignup){
 			FormInfo = (
 				<div>
-					<p>Please provide us information about you. The information requires for booking an appointment</p>
-			<Form/>
+					<p>Please provide us information about you. The information requires for booking an appointment.</p>
+			<Form newUser={true}/>
 				</div>				
 			);
 			this.setState({flag: true});
@@ -102,19 +102,19 @@ class Auth extends React.Component {
     }
 
     let authRedirect = null;
-    if (this.props.isAuthencitaced &&!this.state.isSignup) {
+    if (this.props.isAuthenticated &&!this.state.isSignup) {
       authRedirect = <Redirect to="/" />;
 		}
 
 		let buttonSwitch = null;
-		if(!this.props.isAuthencitaced){
+		if(!this.props.isAuthenticated){
 			buttonSwitch = <button onClick={this.switchAuthModeHandler} className="form__button">
           Switch to {this.state.isSignup ? "Sign in" : "Sign Up"}
         </button>
 		}
 
     return (
-      <div className="container container--form">
+      <div className="container--form">
         {authRedirect}
         {errorMessage}        
         {form}
@@ -129,7 +129,7 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthencitaced: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null
   };
 };
 

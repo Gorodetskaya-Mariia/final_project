@@ -27,8 +27,13 @@ export const phoneNumber = value =>
 
 class Form extends React.Component {
   onSubmit = formValues => {
-    this.props.onForm(formValues, this.props.userId, this.props.token);
-    this.props.history.push("/");
+		const { onForm, onFormUpdate, userId, token, newUser, userData } = this.props;
+		if(newUser) {
+			onForm(formValues, userId, token);
+    	this.props.history.push("/");
+		} else {
+			onFormUpdate(formValues, userData[0].id, userId, token);
+		}    
   };
 
   renderField = ({ input, label, type, meta: { touched, error } }) => {
@@ -36,7 +41,7 @@ class Form extends React.Component {
       <div className="form__field">
         <label>{label}</label>
         <div>
-          <input {...input} placeholder={label} type={type} />
+          <input {...input} type={type} placeholder={label}/>
           {touched && error && <div className="error">{error}</div>}
         </div>
       </div>
@@ -44,8 +49,8 @@ class Form extends React.Component {
   };
 
   render() {
-    const { handleSubmit, submitting } = this.props;
-    let errorMessage = null;
+		const { handleSubmit, submitting } = this.props;
+		let errorMessage = null;
     let form = (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <Field
@@ -53,13 +58,13 @@ class Form extends React.Component {
           type="text"
           component={this.renderField}
           label="Username"
-          validate={[required, minLength3, maxLength15, alpha]}
+					validate={[required, minLength3, maxLength15, alpha]}
         />
         <Field
           name="phone"
           type="number"
           component={this.renderField}
-          label="Phone number"
+          label="Phone number"					
           validate={[required, phoneNumber]}
         />
         <div>
@@ -71,7 +76,7 @@ class Form extends React.Component {
     );
 
     if (this.props.loading) {
-      form = null;
+			form = null;			
     }
 
     if (this.props.error) {
@@ -92,14 +97,18 @@ const mapStateToProps = state => {
     error: state.userData.error,
     loading: state.userData.loading,
     token: state.auth.token,
-    userId: state.auth.userId
+		userId: state.auth.userId,
+		userData: state.userData.userData,
+		userData: state.userData.update
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onForm: (formValues, userId, token) =>
-      dispatch(actions.addUserData(formValues, userId, token))
+			dispatch(actions.addUserData(formValues, userId, token)),
+		onFormUpdate: (formValues, id, userId, token) =>
+      dispatch(actions.updateUserData(formValues, id, userId, token))
   };
 };
 
