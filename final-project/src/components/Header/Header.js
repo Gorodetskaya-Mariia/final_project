@@ -58,20 +58,6 @@ class Header extends React.Component {
               </Menu.Item>
             </Menu.ItemGroup>
           </SubMenu>
-          {/* <SubMenu
-          title={
-            <span className="submenu-title-wrapper">
-							Sign in
-            </span>
-          }
-        >
-          <Menu.ItemGroup title="">
-            <Menu.Item key="setting:1">
-							<GoogleAuth></GoogleAuth>						
-						</Menu.Item>
-          </Menu.ItemGroup>
-        </SubMenu>   */}
-
           {this.props.isAuthenticated && (
             <Menu.Item key="account">
               <Link to="/account" className="">

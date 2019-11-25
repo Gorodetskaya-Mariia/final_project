@@ -26,7 +26,11 @@ class Auth extends React.Component {
     this.setState(prevState => {
       return { isSignup: !prevState.isSignup };
     });
-  };
+	};
+	
+	changeInfoHandler(){
+		return <Redirect to="/" />;
+	}
 
   onSubmit = formValues => {
     this.props.onAuth(
@@ -39,7 +43,7 @@ class Auth extends React.Component {
 			FormInfo = (
 				<div>
 					<p>Please provide us information about you. The information requires for booking an appointment.</p>
-			<Form newUser={true}/>
+			<Form newUser={true} changeInfoHandler={this.changeInfoHandler}/>
 				</div>				
 			);
 			this.setState({flag: true});

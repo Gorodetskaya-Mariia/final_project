@@ -9,7 +9,7 @@ import { Button } from "antd";
 import "./Account.css";
 
 class Account extends React.Component {
-  state = { onChange: false };
+  state = { onChange: false , id: null };
 
   componentDidMount() {
     const { onFetchAppointments, onFetchUserData, token, userId } = this.props;
@@ -27,9 +27,15 @@ class Account extends React.Component {
 			.catch((err) => console.warn(err))
 	};
 
-  onChangeDataHandler = () => {
-    this.setState({ onChange: true });
-  };
+  onChangeDataHandler = (e) => {
+		const id = e.target.getAttribute('data-id');
+		this.setState({ onChange: true });
+		this.setState({ id: id });
+	};
+	
+	changeInfoHandler = () => {
+		this.setState({ onChange: false })
+	}
 
   render() {
     let appointmentsList = [];
@@ -40,7 +46,7 @@ class Account extends React.Component {
     const { onChange } = this.state;
 
     if (onChange) {
-      form = <Form newUser={false} />;
+      form = <Form newUser={false} id={this.state.id} changeInfoHandler={this.changeInfoHandler} />;
     }
 
     appointmentsList = appointments.map(appointment => (
@@ -58,16 +64,23 @@ class Account extends React.Component {
 
 		if(userData.length){
 			userDataList = userData.map(item => (
-				<div key={item.id ? item.id : null} className="account__card-row d-flex flex-column">
+				<div
+				  key={item.id ? item.id : null}
+					className="account__card-row d-flex flex-column"
+				>
 					<div className="account__card-item">
-						<strong>Your name </strong>
+						<strong>Your name: </strong>
 						<span>{item.username ? item.username : "Please"}</span>
 					</div>
 					<div className="account__card-item">
 						<strong>Phone number: </strong>
 						<span>{item.username ? item.phone : "Please"}</span>
 					</div>
-					<Button type="primary" onClick={this.onChangeDataHandler}>
+					<Button
+						type="primary"
+						onClick={this.onChangeDataHandler}
+						data-id={item.id}
+					>
 						Change data
 					</Button>
 					{form}
@@ -84,7 +97,7 @@ class Account extends React.Component {
 
     if (!this.props.loading) {
       content = (
-        <div className="container--account d-flex justify-center">
+        <div className="d-flex justify-center">
           <Card title="Services" bordered={true} className="account__card">
             {appointmentsList}
           </Card>
@@ -99,7 +112,11 @@ class Account extends React.Component {
       );
     }
 
-    return content;
+		return (
+			<div className="wrapper">
+				{content}
+			</div>
+		)
   }
 }
 

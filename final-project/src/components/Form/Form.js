@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
 import "./Form.css";
@@ -24,15 +25,26 @@ export const phoneNumber = value =>
   value && !/^(0|[1-9][0-9]{10})$/i.test(value)
     ? "Invalid phone number, must be 11 digits"
     : undefined;
-
 class Form extends React.Component {
+	
   onSubmit = formValues => {
-		const { onForm, onFormUpdate, userId, token, newUser, userData } = this.props;
+		const {
+      onForm,
+      onFormUpdate,
+      userId,
+      token,
+      newUser,
+			id,
+			changeInfoHandler,
+    } = this.props;
 		if(newUser) {
 			onForm(formValues, userId, token);
-    	this.props.history.push("/");
+			changeInfoHandler();
 		} else {
-			onFormUpdate(formValues, userData[0].id, userId, token);
+			onFormUpdate(formValues, id, userId, token);
+			if(changeInfoHandler){
+				changeInfoHandler();
+			}			
 		}    
   };
 
@@ -62,13 +74,17 @@ class Form extends React.Component {
         />
         <Field
           name="phone"
-          type="number"
+          type="phone"
           component={this.renderField}
           label="Phone number"					
           validate={[required, phoneNumber]}
         />
         <div>
-          <button type="submit" disabled={submitting} className="form__button">
+          <button
+						type="submit"
+						disabled={submitting}
+						className="form__button"
+					>
             Save
           </button>
         </div>

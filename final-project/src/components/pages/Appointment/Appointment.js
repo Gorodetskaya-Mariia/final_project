@@ -19,7 +19,8 @@ class Appointment extends React.Component {
       formValues,
       this.props.userId,
       this.props.token
-    );
+		);
+		this.props.history.push("/account");
   };
 
   renderSelect = ({ input, label, options, meta: { touched, error } }) => {

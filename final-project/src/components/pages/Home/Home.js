@@ -7,7 +7,7 @@ import "./Home.css";
 class Home extends React.Component {
   render() {
     return (
-      <div className="container--home d-flex space-between align-items-center">
+      <div className="wrapper wrapper--home d-flex space-between align-items-center">
 				<div className="">
 					<h2 className="title">Cuts, Colour Specialists, Hair, Waxing for Men & Women</h2>
 					{this.props.isAuthenticated ? (
@@ -40,7 +40,7 @@ class Home extends React.Component {
             <h3>Karla</h3>
 						<div>Master Colorist</div>
           </div>         
-        </Carousel>        
+        </Carousel>   
       </div>
     );
   }

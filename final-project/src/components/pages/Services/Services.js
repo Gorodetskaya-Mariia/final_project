@@ -79,7 +79,7 @@ class Services extends React.Component {
 		}
 
     return (
-      <div>
+      <div className="wrapper">
 				<div className="w-100 d-flex justify-center">
 					<img
 						className={`services__image ${classAdd}`}

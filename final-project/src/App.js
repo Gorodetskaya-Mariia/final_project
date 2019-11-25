@@ -64,7 +64,6 @@ class App extends React.Component {
 						<Route path="/logout" component={Logout} />
 						<Route path="/account" component={Account} />
 						<Route path="/appointment" component={Appointment} />
-						<Redirect to="/" />
 					</main>          
         </BrowserRouter>
       );

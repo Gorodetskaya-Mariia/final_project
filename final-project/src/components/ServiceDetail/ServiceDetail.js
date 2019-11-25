@@ -53,7 +53,7 @@ class ServiceDetail extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <div className="service__wrapper d-flex flex-column">
 					<div className="service__description">
             {this.props.services.selectedService.description}
