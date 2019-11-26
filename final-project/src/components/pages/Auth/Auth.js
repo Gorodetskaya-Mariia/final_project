@@ -5,6 +5,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import * as actions from "../../../actions";
 import Spinner from "../../Spinner/Spinner";
 import Form from "../../Form/Form";
+import { Modal } from 'antd';
 
 const required = value =>
   value || typeof value === "number" ? undefined : "Required";
@@ -20,7 +21,7 @@ const email = value =>
 
 let FormInfo = null;
 class Auth extends React.Component {
-	state = { isSignup: true, flag: false };
+	state = { isSignup: true, flag: false, visible: true };
 
   switchAuthModeHandler = () => {
     this.setState(prevState => {
@@ -28,7 +29,7 @@ class Auth extends React.Component {
     });
   };
 
-  changeInfoHandler() {
+  changeInfoHandler = () => {
     this.props.history.push("/");
   };
 
@@ -58,6 +59,7 @@ class Auth extends React.Component {
       );
       this.setState({ flag: true });
     }
+    this.setState({ visible: true });
   };
 
   renderField = ({ input, label, type, meta: { touched, error } }) => {
@@ -76,6 +78,16 @@ class Auth extends React.Component {
     )
   };
 
+  OkHandle = () => {
+    this.setState({ visible: false });
+    this.setState({ flag: false });
+  };
+
+  CancelHandle = () => {
+    this.setState({ visible: false });
+    this.setState({ flag: false });
+  };
+
   render() {
 		const {
 			handleSubmit,
@@ -84,9 +96,10 @@ class Auth extends React.Component {
 			error,
 			isAuthenticated
 		} = this.props;
-		const { flag, isSignup } = this.state;
+		const { flag, isSignup, visible } = this.state;
     let errorMessage = null;
     let form = null;
+
     if (!flag) {
       form = (
         <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -122,7 +135,15 @@ class Auth extends React.Component {
     }
 
     if (error) {
-      errorMessage = <p>{error.message}</p>;
+      errorMessage = <Modal
+        title=""
+        visible={visible}
+        onOk={this.OkHandle}
+        onCancel={this.CancelHandle}
+      >
+        <p>{error.message}</p>        
+      </Modal>
+      FormInfo = null;
     }
 
     let authRedirect = null;

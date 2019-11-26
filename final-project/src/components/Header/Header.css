@@ -4,6 +4,12 @@ header.container {
   box-shadow: 0 2px 8px;
 }
 
+@media (max-width: 768px){
+	header.container {
+		padding: 30px;
+	}
+}
+
 .ant-menu.ant-menu-horizontal {
   border-bottom: 2px solid transparent;
   color: #ffffff;

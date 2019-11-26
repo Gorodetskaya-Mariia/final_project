@@ -4,8 +4,7 @@ import * as actions from "../../../actions";
 import Spinner from "../../Spinner/Spinner";
 import Form from "../../Form/Form";
 import axios from "axios";
-import { Card } from "antd";
-import { Button } from "antd";
+import { Card, Button } from "antd";
 import "./Account.css";
 
 class Account extends React.Component {
@@ -111,7 +110,7 @@ class Account extends React.Component {
 
     if (!loading) {
       content = (
-        <div className="d-flex justify-center">
+        <div className="account__card-wrapper d-flex justify-center">
           <Card
 						title="Services"
 						bordered={true}

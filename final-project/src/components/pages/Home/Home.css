@@ -26,3 +26,13 @@
 .ant-carousel .slick-slide h3 {
 	font-size: 18px;
 }
+
+@media (max-width: 560px) {
+	.wrapper.wrapper--home {
+		flex-direction: column;
+	}
+	
+	.ant-carousel {
+    width: 78%;
+	}
+}

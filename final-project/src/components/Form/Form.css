@@ -1,5 +1,5 @@
 .container--form {
-	padding-top: 60px;
+  padding-top: 60px;
 }
 
 .container--form p {
@@ -9,10 +9,10 @@
 }
 
 .container--form .form__info {
-	font-size: 16px;
-	font-weight: 700;
-	color: #000000;
-	text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
 }
 
 .error {
@@ -72,4 +72,19 @@ form {
 .form__button:hover,
 .form__button:focus {
   opacity: 0.7;
+}
+
+@media (max-width: 1100px) {
+  form,
+  .form__field,
+  .form__field--text,
+  .form__field select,
+	.form__field input,
+	.form__button {
+    width: 300px;
+	}
+
+	.container--form {
+		padding-bottom: 60px;
+	}
 }
