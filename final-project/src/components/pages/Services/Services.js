@@ -43,7 +43,8 @@ class Services extends React.Component {
   }
 
   renderList() {
-    const { filteredServices, forWhom } = this.state;
+		const { filteredServices, forWhom } = this.state;
+		const { loading } = this.props;
 		let content = (
 			filteredServices.map(item => (
 				<Link
@@ -57,7 +58,7 @@ class Services extends React.Component {
 			))
 		);
 
-		if (this.props.loading) {
+		if (loading) {
       content = <Spinner />;
     }
     return (
@@ -66,7 +67,7 @@ class Services extends React.Component {
   }
 
   render() {
-    const { forWhom } = this.state;
+    const { forWhom, filteredServices } = this.state;
 		let src = "";
 		let classAdd = "";
 
@@ -84,10 +85,11 @@ class Services extends React.Component {
 					<img
 						className={`services__image ${classAdd}`}
 						alt="services"
-						src={ src }></img>
+						src={ src }
+					></img>
 					</div>
 				<div className="services__container d-flex space-between">
-					{this.state.filteredServices && this.renderList()}
+					{filteredServices && this.renderList()}
 				</div>        
       </div>
     );

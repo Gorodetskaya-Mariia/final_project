@@ -12,7 +12,12 @@ class Account extends React.Component {
   state = { onChange: false , id: null };
 
   componentDidMount() {
-    const { onFetchAppointments, onFetchUserData, token, userId } = this.props;
+    const {
+			onFetchAppointments,
+			onFetchUserData,
+			token,
+			userId
+		} = this.props;
     onFetchAppointments(token, userId);
     onFetchUserData(token, userId);
 	}
@@ -20,7 +25,8 @@ class Account extends React.Component {
   onDeleteHandler = (e) => {
 		const { onFetchAppointments, token, userId } = this.props;
 		const id = e.target.getAttribute('data-id');
-		axios.delete(`https://react-beauty-salon-cacbe.firebaseio.com/appointments/${id}.json?auth=${this.props.token}`)
+
+		axios.delete(`https://react-beauty-salon-cacbe.firebaseio.com/appointments/${id}.json?auth=${token}`)
       .then(res => {
 				onFetchAppointments(token, userId);
 			})
@@ -42,11 +48,15 @@ class Account extends React.Component {
     let userDataList = [];
     let form = null;
     let content = <Spinner />;
-    const { appointments, userData } = this.props;
-    const { onChange } = this.state;
+    const { appointments, userData, loading } = this.props;
+    const { onChange, id } = this.state;
 
     if (onChange) {
-      form = <Form newUser={false} id={this.state.id} changeInfoHandler={this.changeInfoHandler} />;
+      form = <Form
+							newUser={false}
+							id={id}
+							changeInfoHandler={this.changeInfoHandler}
+						/>;
     }
 
     appointmentsList = appointments.map(appointment => (
@@ -56,7 +66,11 @@ class Account extends React.Component {
       >
         <p>{appointment.service}</p>
         <p>{appointment.time}</p>
-        <Button type="danger" data-id={appointment.id} onClick={this.onDeleteHandler}>
+        <Button
+					type="danger"
+					data-id={appointment.id}
+					onClick={this.onDeleteHandler}
+				>
           Delete
         </Button>
       </div>
@@ -95,10 +109,14 @@ class Account extends React.Component {
 			)
 		}	
 
-    if (!this.props.loading) {
+    if (!loading) {
       content = (
         <div className="d-flex justify-center">
-          <Card title="Services" bordered={true} className="account__card">
+          <Card
+						title="Services"
+						bordered={true}
+						className="account__card"
+					>
             {appointmentsList}
           </Card>
           <Card

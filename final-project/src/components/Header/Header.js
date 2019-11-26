@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import GoogleAuth from "../GoogleAuth";
 import { Menu } from "antd";
 import "./Header.css";
 
@@ -38,7 +37,7 @@ class Header extends React.Component {
           mode="horizontal"
         >
           <Menu.Item key="home">
-            <Link to="/" className="">
+            <Link to="/">
               Home
             </Link>
           </Menu.Item>
@@ -47,12 +46,12 @@ class Header extends React.Component {
           >
             <Menu.ItemGroup title="">
               <Menu.Item key="for men">
-                <Link to="/services-for-men" className="">
+                <Link to="/services-for-men">
                   for men
                 </Link>
               </Menu.Item>
               <Menu.Item key="for women">
-                <Link to="/services-for-women" className="">
+                <Link to="/services-for-women">
                   for women
                 </Link>
               </Menu.Item>
@@ -60,7 +59,7 @@ class Header extends React.Component {
           </SubMenu>
           {this.props.isAuthenticated && (
             <Menu.Item key="account">
-              <Link to="/account" className="">
+              <Link to="/account">
                 My account
               </Link>
             </Menu.Item>
@@ -68,11 +67,11 @@ class Header extends React.Component {
 
           <Menu.Item key="login">
             {!this.props.isAuthenticated ? (
-              <Link to="/login" className="">
+              <Link to="/login">
                 Login
               </Link>
             ) : (
-              <Link to="/logout" className="">
+              <Link to="/logout">
                 Logout
               </Link>
             )}

@@ -17,7 +17,8 @@ class ServiceDetail extends React.Component {
   };
 
   renderList() {
-    const { selectedService } = this.props.services;
+		const { selectedService } = this.props.services;
+		const { isAuthenticated } = this.props;
     let filteredArray = Object.keys(selectedService);
     let result = [];
     for (let item in filteredArray) {
@@ -33,7 +34,7 @@ class ServiceDetail extends React.Component {
         <div className="service__buttons d-flex">
           <Button
             type="primary"
-            disabled={!this.props.isAuthenticated}
+            disabled={!isAuthenticated}
             className="service__buttons--book"
             onClick={this.onBookHandler}
           >
@@ -41,7 +42,7 @@ class ServiceDetail extends React.Component {
           </Button>
           <Button
             type="danger"
-            disabled={!this.props.isAuthenticated}
+            disabled={!isAuthenticated}
             onClick={this.onCancelHandler}
           >
             Cancel
@@ -52,17 +53,18 @@ class ServiceDetail extends React.Component {
   }
 
   render() {
+		const { services, isAuthenticated } = this.props;
     return (
       <div className="wrapper">
         <div className="service__wrapper d-flex flex-column">
 					<div className="service__description">
-            {this.props.services.selectedService.description}
+            {services.selectedService.description}
           </div>
           <div className="service__list d-flex flex-column">            
-            {this.props.services.selectedService && this.renderList()}
+            {services.selectedService && this.renderList()}
           </div>
         </div>
-        {!this.props.isAuthenticated && (
+        {!isAuthenticated && (
           <div className="service__info">
 					<Icon type="exclamation-circle" className="service__icon"/>
             Booking is available only for authenticated customers. If you want

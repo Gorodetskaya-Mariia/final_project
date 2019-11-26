@@ -1,6 +1,5 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions";
 import "./Form.css";
@@ -53,7 +52,11 @@ class Form extends React.Component {
       <div className="form__field">
         <label>{label}</label>
         <div>
-          <input {...input} type={type} placeholder={label}/>
+          <input
+						{...input}
+						type={type}
+						placeholder={label}
+					/>
           {touched && error && <div className="error">{error}</div>}
         </div>
       </div>
@@ -61,7 +64,7 @@ class Form extends React.Component {
   };
 
   render() {
-		const { handleSubmit, submitting } = this.props;
+		const { handleSubmit, submitting, loading, error } = this.props;
 		let errorMessage = null;
     let form = (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -91,12 +94,12 @@ class Form extends React.Component {
       </form>
     );
 
-    if (this.props.loading) {
+    if (loading) {
 			form = null;			
     }
 
-    if (this.props.error) {
-      errorMessage = <p>{this.props.error.message}</p>;
+    if (error) {
+      errorMessage = <p>{error.message}</p>;
     }
 
     return (

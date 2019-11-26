@@ -6,23 +6,29 @@ import "./Home.css";
 
 class Home extends React.Component {
   render() {
+		const { isAuthenticated } = this.props;
     return (
       <div className="wrapper wrapper--home d-flex space-between align-items-center">
 				<div className="">
 					<h2 className="title">Cuts, Colour Specialists, Hair, Waxing for Men & Women</h2>
-					{this.props.isAuthenticated ? (
-						<Link to="/appointment">
-							<Button type="primary" size={"large"}>
-								Book an appointment
-							</Button>
-						</Link>
-					) : (
-						<Link to="/login">
-							<Button type="primary" size={"large"}>
-								Sign up for booking
-							</Button>
-						</Link>
-					)}
+					{isAuthenticated
+					? (<Link to="/appointment">
+								<Button
+									type="primary"
+									size={"large"}
+								>
+									Book an appointment
+								</Button>
+							</Link>)
+					: (<Link to="/login">
+								<Button
+									type="primary"
+									size={"large"}
+								>
+									Sign up for booking
+								</Button>
+						</Link>)
+					}
 				</div>
 				<Carousel dotPosition="bottom">
           <div className="slide">

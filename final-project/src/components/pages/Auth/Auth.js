@@ -1,14 +1,14 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import * as actions from "../../../actions";
 import Spinner from "../../Spinner/Spinner";
 import Form from "../../Form/Form";
 
 const required = value =>
-	value || typeof value === "number" ? undefined : "Required";
-	
+  value || typeof value === "number" ? undefined : "Required";
+
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined;
 export const minLength6 = minLength(6);
@@ -16,9 +16,9 @@ export const minLength6 = minLength(6);
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? "Invalid email address"
-		: undefined;
-		let FormInfo = null;
+    : undefined;
 
+let FormInfo = null;
 class Auth extends React.Component {
 	state = { isSignup: true, flag: false };
 
@@ -26,28 +26,38 @@ class Auth extends React.Component {
     this.setState(prevState => {
       return { isSignup: !prevState.isSignup };
     });
-	};
-	
-	changeInfoHandler(){
-		return <Redirect to="/" />;
-	}
+  };
+
+  changeInfoHandler() {
+    this.props.history.push("/");
+  };
 
   onSubmit = formValues => {
-    this.props.onAuth(
+		const { onAuth } = this.props;
+		const { isSignup } = this.state;
+    onAuth(
       formValues.email,
       formValues.password,
-      this.state.isSignup
-		);
+      isSignup
+    );
 
-		if(this.state.isSignup){
-			FormInfo = (
-				<div>
-					<p>Please provide us information about you. The information requires for booking an appointment.</p>
-			<Form newUser={true} changeInfoHandler={this.changeInfoHandler}/>
-				</div>				
-			);
-			this.setState({flag: true});
-		}
+    if (isSignup) {
+      FormInfo = (
+        <div>
+          <div className="form__info">
+            Please provide us information about you.
+          </div>
+					<div className="form__info">
+            The information requires for booking an appointment.
+          </div>
+          <Form 
+						newUser={true}
+						changeInfoHandler={this.changeInfoHandler}
+					/>
+        </div>
+      );
+      this.setState({ flag: true });
+    }
   };
 
   renderField = ({ input, label, type, meta: { touched, error } }) => {
@@ -55,75 +65,87 @@ class Auth extends React.Component {
       <div className="form__field">
         <label>{label}</label>
         <div>
-          <input {...input} placeholder={label} type={type} />
-          {touched &&
-            ((error && <div className="error">{error}</div>))}
+          <input
+						{...input}
+						placeholder={label}
+						type={type}					
+					/>
+          {touched && error && <div className="error">{error}</div>}
         </div>
       </div>
-    );
+    )
   };
 
   render() {
-    const { handleSubmit, submitting } = this.props;
-		let errorMessage = null;
-		let form = null;
-    if(!this.state.flag) {
-			form = (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Field
-          name="email"
-          type="email"
-          component={this.renderField}
-          label="Email"
-          validate={[email, required]}					
-        />
-        <Field
-          name="password"
-          type="password"
-          component={this.renderField}
-          label="Password"
-          validate={[minLength6, required]}
-        />
-				<div>
+		const {
+			handleSubmit,
+			submitting,
+			loading,
+			error,
+			isAuthenticated
+		} = this.props;
+		const { flag, isSignup } = this.state;
+    let errorMessage = null;
+    let form = null;
+    if (!flag) {
+      form = (
+        <form onSubmit={handleSubmit(this.onSubmit)}>
+          <Field
+            name="email"
+            type="email"
+            component={this.renderField}
+            label="Email"
+            validate={[email, required]}
+          />
+          <Field
+            name="password"
+            type="password"
+            component={this.renderField}
+            label="Password"
+            validate={[minLength6, required]}
+          />
+          <div>
             <button
               type="submit"
               disabled={submitting}
               className="form__button"
             >
               Submit
-            </button>		
+            </button>
           </div>
-      </form>
-		);
-			}
+        </form>
+      );
+    }
 
-    if (this.props.loading) {
+    if (loading) {
       form = <Spinner />;
     }
 
-    if (this.props.error) {
-      errorMessage = <p>{this.props.error.message}</p>;
+    if (error) {
+      errorMessage = <p>{error.message}</p>;
     }
 
     let authRedirect = null;
-    if (this.props.isAuthenticated &&!this.state.isSignup) {
+    if (isAuthenticated && !isSignup) {
       authRedirect = <Redirect to="/" />;
-		}
+    }
 
-		let buttonSwitch = null;
-		if(!this.props.isAuthenticated){
-			buttonSwitch = <button onClick={this.switchAuthModeHandler} className="form__button">
-          Switch to {this.state.isSignup ? "Sign in" : "Sign Up"}
+    let buttonSwitch = null;
+    if (!isAuthenticated) {
+      buttonSwitch = (
+        <button onClick={this.switchAuthModeHandler} className="form__button">
+          Switch to {isSignup ? "Sign in" : "Sign Up"}
         </button>
-		}
+      );
+    }
 
     return (
       <div className="container--form">
         {authRedirect}
-        {errorMessage}        
+        {errorMessage}
         {form}
-				{FormInfo}
-				{buttonSwitch}       
+        {FormInfo}
+        {buttonSwitch}
       </div>
     );
   }
@@ -144,7 +166,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-Auth = connect(mapStateToProps, mapDispatchToProps)(Auth);
+Auth = withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
 
 export default reduxForm({
   form: "auth"

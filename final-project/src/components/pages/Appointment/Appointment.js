@@ -15,10 +15,11 @@ const alphaNumeric = value =>
 
 class Appointment extends React.Component {
   onSubmit = formValues => {
-    this.props.onCreateAppointment(
+		const { onCreateAppointment, userId, token } = this.props;
+    onCreateAppointment(
       formValues,
-      this.props.userId,
-      this.props.token
+      userId,
+      token
 		);
 		this.props.history.push("/account");
   };
@@ -43,8 +44,9 @@ class Appointment extends React.Component {
   };
 
   render() {
+		const { handleSubmit, loading } = this.props;
     let form = (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <Field
           name="service"
           component={this.renderSelect}
@@ -76,7 +78,7 @@ class Appointment extends React.Component {
       </form>
     );
 
-    if (this.props.loading) {
+    if (loading) {
       form = <Spinner />;
     }
 

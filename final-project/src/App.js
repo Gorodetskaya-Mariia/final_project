@@ -35,7 +35,7 @@ class App extends React.Component {
 					<Route path="/services-for-men/waxing" component={ServiceDetail} />
 					<Route path="/login" component={Auth} />
 				</main>       
-        <Redirect to="/login" />
+        <Redirect to="/" />
       </BrowserRouter>
     );
 
@@ -64,7 +64,8 @@ class App extends React.Component {
 						<Route path="/logout" component={Logout} />
 						<Route path="/account" component={Account} />
 						<Route path="/appointment" component={Appointment} />
-					</main>          
+					</main>
+					<Redirect to="/" />         
         </BrowserRouter>
       );
     }
