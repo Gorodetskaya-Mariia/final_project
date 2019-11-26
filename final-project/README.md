@@ -1,68 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# «Beauty Salon» - a beauty salon for men and women
+The application contains several pages. On "Home" page you can find information about salon and a team of the salon. On "Services" page you can find a list of services for men and women. Booking an appointment is available only for authenticated clients. Every user can book or cancel appointments after login. "Account" page stores all appointments of users and personal information about users (phone and name which are necessary for booking an appointment).
 
-## Available Scripts
+## Technology stack and techniques used in project:
+	* Antd library
+	* Firebase Realtime database
+	* Redux Form
+	* Redux Thunk
+	* Axios
+	* BEM methodology
+	* CSS Flex Layout
+	* Responsive Web Design approach
 
-In the project directory, you can run:
+## You can use commands bellow to run project:
+	* npm install
+	* npm start
 
-### `npm start`
+### Project overview:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Antd library allows to import ready components in the project. Components like navigation menu, buttons, cards and others were imported for styling.
+- HTTP requests such as GET, POST, PUT and DELETE were done by Axios. Axios allows not only to intercept request and response and automatic transform JSON data, but also to handle errors from backend.
+- Firebase Realtime database was used for storing data about services, appointments and personal information of clients. Authentication was done by Firebase. Also, only authenticated users have access to appointments and personal information. This protection was achieved by setting rules in Firebase.
+- Local Storage was used for storing token, id of a user and expiration time during one hour to allow the user use an application even after updating the application without login again.
+- Some pages like "Account", "Logout" and "Appointment" are not available for not authenticated users. These users are redirected to "Home" page if they try to get access to the pages.  
+- Redux Thunk was used for writing async action creators.
+- Redux Form. Individual validators for each field were used to provide synchronous client-side validation to the form. If the value is valid, the validation function returns undefined. If the value is invalid, the validation function returns an error. This is a string, which displays to user immediately.
+- Responsive Web Design is achieved through flexboxes and media expressions.
