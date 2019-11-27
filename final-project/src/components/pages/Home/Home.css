@@ -20,19 +20,22 @@
 }
 
 .ant-carousel .slick-dots li button {
-	background-color: #ff7875 !important;
+  background-color: #ff7875 !important;
 }
 
 .ant-carousel .slick-slide h3 {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 @media (max-width: 560px) {
-	.wrapper.wrapper--home {
-		flex-direction: column;
-	}
-	
-	.ant-carousel {
+  .wrapper.wrapper--home {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+
+  .ant-carousel {
     width: 78%;
-	}
+  }
 }

@@ -71,7 +71,7 @@ class ServiceDetail extends React.Component {
             to book an appointment please
             <span onClick={this.onSignupHandler}>
               {" "}
-              click for sign up
+              click for sign up.
             </span>
           </div>
         )}

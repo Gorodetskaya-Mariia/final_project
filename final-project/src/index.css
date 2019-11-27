@@ -12,6 +12,7 @@ body {
 main.container {
   min-height: 650px;
   background-color: white;
+  -webkit-box-shadow: 0 2px 8px;
   box-shadow: 0 2px 8px;
 }
 
@@ -56,26 +57,38 @@ h2 {
 }
 
 .d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .space-between {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
 .flex-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
 .align-items-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 
 .justify-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 
 .f-wrap {
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 
@@ -102,9 +115,9 @@ h2 {
 @media (max-width: 560px) {
   .container {
     width: 360px;
-	}
-	
-	h2 {
-		margin-right: 0;
-	}
+  }
+
+  h2 {
+    margin-right: 0;
+  }
 }

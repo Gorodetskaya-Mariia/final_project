@@ -1,5 +1,5 @@
 # «Beauty Salon» - a beauty salon for men and women
-The application contains several pages: "Home", "Services", "Login" - a page for authentication, "Appointment" - a page for booking an appointment and "Account". On "Home" page you can find information about salon and a team of the salon. On "Services" page you can find a list of services for men and women. Booking an appointment is available only for authenticated clients. "Account" page stores all appointments of users and personal information about users (phone and name which are necessary for booking an appointment). Every user can book or cancel appointments after login ("Account" page).
+The application contains several pages: "Home", "Services", "Login" - a page for authentication, "Appointment" - a page for booking an appointment and "Account". On "Home" page you can find information about salon and a team of the salon. On "Services" page you can find a list of services for men and women. Booking an appointment is available only for authenticated clients. "Account" page stores all appointments of users and personal information about users (phone and name which are necessary for booking an appointment). Every user not only can book or cancel appointments after login ("Account" page), but also can change the personal information.
 
 ## Technology stack and techniques used in project:
 	* Antd library
@@ -25,3 +25,4 @@ The application contains several pages: "Home", "Services", "Login" - a page for
 - Redux Thunk has been used for writing async action creators.
 - Redux Form. Individual validators for each field have been used to provide synchronous client-side validation to the form. If the value is valid, the validation function returns undefined. If the value is invalid, the validation function returns an error. This is a string, which displays to user immediately.
 - Responsive Web Design have been achieved through flexboxes and media expressions.
+- The application is cross browser compatible with Chrome, Firefox, Edge. 
